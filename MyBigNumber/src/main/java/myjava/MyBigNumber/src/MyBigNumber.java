@@ -29,41 +29,45 @@ public class MyBigNumber {
         
         //check two number sequences is empty or not
         // if it is null make it = '0'
-
-        if (((str1.matches ("null")) || (str1.trim().isEmpty())) && ((!str2.matches ("null")) && (!str2.trim().isEmpty())))  {
-            return s2;
+        if ((str1 == null) || (str1.trim().isEmpty())) {
+            str1 = "0";//
         }
-        if (((str2.matches ("null"))|| (str2.trim().isEmpty())) && ((!str1.matches ("null")) && (!str1.trim().isEmpty()))) {
-            return s1;
-        }
-        if (((str1.matches("null") || (str1.trim().isEmpty()))) && (((str2.matches("null")) || (str2.trim().isEmpty())))) {
-            return "0";
+        
+        if ((str2 == null) || (str2.trim().isEmpty())) {
+            str2 = "0";//
         }
         
         //Check whether the number is negative
         if (str2.charAt(0) == '-' && str1.charAt(0) == '-') {
-       	    return "Cả hai số đều âm, vui lòng nhập lại cả hai số";
-       	}
-        if (str1.charAt(0) == '-' && str2.charAt(0) != '-') {
-            return "Số thứ nhất âm, vui lòng nhập lại số thứ nhất";
+            
+            return "Cả hai số đều âm, vui lòng nhập lại cả hai số";//
         }
+        
+        if (str1.charAt(0) == '-' && str2.charAt(0) != '-') {
+            
+            return "Số thứ nhất âm, vui lòng nhập lại số thứ nhất";//
+        }
+        
         if (str2.charAt(0) == '-' && str1.charAt(0) != '-') {
-        	 return "Số thứ hai âm, vui lòng nhập lại số thứ hai";
+            
+            return "Số thứ hai âm, vui lòng nhập lại số thứ hai";//
         }
         
 
         //Check whether characters are special characters or characters
         if (flag1.find() && flag2.find()) {
-       	     return "Cả hai chuỗi không phải là số";
+            
+            return "Cả hai chuỗi không phải là số";
         }
+        
         if (flag1.find()) {
-        	 return "Chuỗi một không phải là số";
+            
+            return "Chuỗi một không phải là số";
         }
         if (flag2.find()) {
-        	 return "Chuỗi hai không phải là số";
+            
+            return "Chuỗi hai không phải là số";
         }
-        
-        
         String finalResult = "";// biến nhận kết quả trả về                    
         int len1 = s1.length();// độ dài chuỗi thứ nhất                     
         int len2 = s2.length();// độ dài chuỗi thứ hai                      
@@ -75,34 +79,35 @@ public class MyBigNumber {
         int memory = 0;// biến ghi lại số nhớ khi cộng 2 số lớn hơn 9                                   
         int s = 0;// Khởi tạo biến tổng bằng 0 
         int step;// hiển thị đang ở bước nào
-        String StringMemoryNumber;//Chuỗi trả về xem có còn nợ hay không
-        String stepResult="";//chuỗi các bước
+        String stringmemorynumber;//Chuỗi trả về xem có còn nợ hay không
+        String stepResult = "";//chuỗi các bước
         int memorybefore;//giá trị cũ của số nhớ
         // Vòng lặp từ 0 đến chuỗi có độ dài lớn nhất
         for (int i = 0; i < maxlen; i++)
         {
-        	
-            index1 = len1 - i - 1;// Lấy vị trí của chuỗi s1                       
+            index1 = len1 - i - 1;// Lấy vị trí của chuỗi s1
             index2 = len2 - i - 1;// Lấy vị trí của chuỗi s2 
             c1 = (index1 >= 0) ? s1.charAt(index1) : '0';// Lấy kí tự từ phải sang trái của chuỗi s1
             c2 = (index2 >= 0) ? s2.charAt(index2) : '0';// Lấy kí tự từ phải sang trái của chuỗi s2
             s = (c1 - '0') + (c2 - '0') + memory;// Biến đổi kí tự thành số rồi cộng 
-            memorybefore=memory;//lưu dữ lại giá trị cũ của số nhớ
-            if(memorybefore==1) {StringMemoryNumber=" Trả nợ 1";}//Có nhớ trả về chuỗi
-            else {StringMemoryNumber="";}//Không nhớ trả về null
+            memorybefore = memory;//lưu dữ lại giá trị cũ của số nhớ
+            if (memorybefore == 1) {
+                stringmemorynumber = " Trả nợ 1; 
+            } //Có nhớ trả về chuỗi 
+            else { stringmemorynumber = ""; } //Không nhớ trả về null
             finalResult = (s % 10) + finalResult;// Lấy s chia dư rồi cộng vào kết quả                               
             memory = s / 10;// Cập nhật lại số nhớ
-            step=i+1;//Tính bước bắt đầu từ 1
-            stepResult=stepResult+"bước "+step+": Lấy "+c1+" cộng "+c2+StringMemoryNumber+" được "+s+" ghi "+s%10+" nhớ "+memory+"    ;    ";//chuỗi in ra từng bước
+            step = i + 1;//Tính bước bắt đầu từ 1
+            stepResult = stepResult + "bước " + step + ": Lấy " + c1 + " cộng " + c2 + StringMemoryNumber 
+                + " được " + s + " ghi " + s % 10 + " nhớ " + memory + "    ;    ";//chuỗi in ra từng bước
             memorybefore = s / 10;//cập nhật số nớ mới
             
         }
         if (memory >= 1) 
-        {     
-        	
+        {
             finalResult = 1 + finalResult;// Nếu cuối cùng còn số nhớ thì ghép vào trước kết quả 
-            stepResult=stepResult+"cuối cùng nhớ một ghi 1 ;";//thêm chuỗi nếu cuối cùng còn số nhớ thì ghép vào trước kết quả
-            
+            stepresult = stepresult + "cuối cùng nhớ một ghi 1 ;";
+                 
         }
      
         return finalResult;// Trả ve kết quả cuối cùng
